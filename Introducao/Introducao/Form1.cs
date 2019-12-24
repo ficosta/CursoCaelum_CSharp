@@ -73,7 +73,7 @@ namespace Introducao
             if (saldo >= valorSaldo)
             {
                 saldo -= valorSaldo;
-                MessageBox.Show($"Saque realizado com sucesso");
+                MessageBox.Show($"Saque realizado com sucesso!");
 
             }
             else
@@ -112,6 +112,93 @@ namespace Introducao
             else
             {
                 MessageBox.Show("Voce é um milionario");
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int idade = 16;
+            bool brasileira = true;
+
+            if (idade >= 16 && brasileira)
+            {
+                MessageBox.Show("Apta a votar");
+
+            }
+            else
+            {
+                MessageBox.Show("Nao pode votar!");
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            double valorNotaFiscal = 500;
+            double imposto;
+            if (valorNotaFiscal < 1000)
+            {
+                imposto = 2;
+            }
+            else if (valorNotaFiscal < 3000)
+            {
+                imposto = 2.5;
+            }
+            else if (valorNotaFiscal < 7000)
+            {
+                imposto = 2.8;
+            }
+            else
+            {
+                imposto = 3;
+            }
+            MessageBox.Show($"Valor da nota {valorNotaFiscal + (valorNotaFiscal * imposto / 100)}");
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //int valor = 15;
+            //string mensagem = "";
+
+            //if(valor > 10)
+            //{
+            //    mensagem = "Maior que 10";
+            //}
+            //else
+            //{
+            //    mensagem = "Menor que 10";
+            //}
+            //MessageBox.Show(mensagem);
+
+
+            //condição ? expressão1_se_true : expressão2_se_false
+            int valor = 15;
+            string mensagem = "";
+
+            mensagem = valor > 10 ? "Maior que 10" : "Menor que 10";
+
+            MessageBox.Show(mensagem);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            int quantidade = 2;
+            int codigo = 103;
+            
+            switch (codigo)
+            {
+                case 100:
+                    MessageBox.Show($"Valor final R${quantidade * 39.90}");
+                    break;
+                case 101:
+                    MessageBox.Show($"Valor final R${quantidade * 4000}");
+                    break;
+                case 102:
+                    MessageBox.Show($"Valor final R${quantidade * 695}");
+                    break;
+                case 103:
+                    MessageBox.Show($"Valor final R${quantidade * 10}");
+                    break;
+
             }
         }
     }
