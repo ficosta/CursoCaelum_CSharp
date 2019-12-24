@@ -201,5 +201,18 @@ namespace Introducao
 
             }
         }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            double valorAplicado = 1000;
+            int meses = 1;
+
+            while(valorAplicado <= 1500)
+            {
+                valorAplicado = valorAplicado * 1.01;
+                    meses++;
+                }
+            MessageBox.Show($"Para chegar em {valorAplicado} precisamos de {meses} meses");
+        }
     }
 }
