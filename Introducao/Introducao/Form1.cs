@@ -32,14 +32,14 @@ namespace Introducao
             int idadeFelipe = 32;
 
             float mediaIdade = (idadeSonia + idadeMarjory + idadeFelipe) / 3;
-           
+
             MessageBox.Show($"A media idade é: {mediaIdade}");
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-           // int pi = 3.14;
+            // int pi = 3.14;
 
         }
 
@@ -64,7 +64,55 @@ namespace Introducao
             a2 = (-b - Math.Sqrt(delta)) / (2 * a);
 
             MessageBox.Show($"A1: {a1} A2: {a2}");
+        }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            double saldo = 100;
+            double valorSaldo = 10;
+            if (saldo >= valorSaldo)
+            {
+                saldo -= valorSaldo;
+                MessageBox.Show($"Saque realizado com sucesso");
+
+            }
+            else
+            {
+                MessageBox.Show("Saldo insuficiente");
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            double saldo = 5;
+            double valorSaque = 10;
+
+            if (saldo >= valorSaque)
+            {
+                saldo -= valorSaque;
+                MessageBox.Show("Saque realizado com sucesso");
+            }
+            else
+            {
+                MessageBox.Show("Saldo insuficiente");
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            double saldo = 500;
+            if (saldo <0.0)
+            {
+                MessageBox.Show("Voce esta negativo");
+            }
+            else if (saldo <1000000.0)
+            {
+                MessageBox.Show("Voce é um bom cliente");
+            }
+            else
+            {
+                MessageBox.Show("Voce é um milionario");
+            }
         }
     }
 }
