@@ -24,7 +24,10 @@ namespace Banco
             contaVitor.numero = 1;
             contaVitor.Deposita(100);
             MessageBox.Show($"{contaVitor.saldo}");
-            contaVitor.Saca(50);
+            if(contaVitor.Saca(50))
+                MessageBox.Show("Saque realizado");
+            else
+                MessageBox.Show("Imposivel sacar");
             MessageBox.Show($"{contaVitor.saldo}");
 
 
