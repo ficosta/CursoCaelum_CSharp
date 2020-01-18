@@ -24,7 +24,6 @@ namespace BancoCaelum
         {
             conta.sacar(100);
             atualizarSaldo();
-            MessageBoxPersonalizado("Saque realziado com sucesso", MessageBoxIcon.Error);
         }
 
         private void btnDepositar_Click(object sender, EventArgs e)
@@ -36,9 +35,6 @@ namespace BancoCaelum
         {
             lblSaldo.Text = Convert.ToString( conta.Saldo);
         }
-        void MessageBoxPersonalizado(string mensagem, MessageBoxIcon icon)
-        {
-            MessageBox.Show(mensagem, "", MessageBoxButtons.OK, icon);
-        }
+
     }
 }
