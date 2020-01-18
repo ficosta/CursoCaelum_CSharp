@@ -13,6 +13,7 @@ namespace EncapsulamentoBanco
     public partial class Form1 : Form
     {
         Conta conta = new Conta();
+        
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace EncapsulamentoBanco
        
         private void button2_Click(object sender, EventArgs e)
         {
+            conta.Titular = new Cliente("Felipe");
             conta.Saca(10);
             atualizaSaldoTela();
         }
@@ -51,5 +53,6 @@ namespace EncapsulamentoBanco
         {
             label1.Text = $"O seu saldo é:{conta.Saldo}";
         }
+
     }
 }

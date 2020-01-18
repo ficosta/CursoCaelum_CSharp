@@ -6,18 +6,20 @@ using System.Threading.Tasks;
 
 namespace EncapsulamentoBanco
 {
-    class Conta
+    public class Conta
     {
         public int Numero { get; set; }
         public double Saldo { get; private set; }
+        public Cliente Titular { get; set; }
 
-
-        public void Saca(double valor)
+        public bool Saca(double valor)
         {
             if(Saldo >= valor)
             {
                 Saldo -= valor;
+                return true;
             }
+            return false;
         }
 
        public void Deposito(double valor)
@@ -26,5 +28,6 @@ namespace EncapsulamentoBanco
                 Saldo += valor;
 
         }
+
     }
 }
