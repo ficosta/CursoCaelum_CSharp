@@ -7,21 +7,21 @@ namespace BancoCaelum
         public double Saldo { get; private set; }
         public int Numero { get; set; }
         public Cliente Titular { get; set; }
-        internal bool sacar(double v)
+        public virtual bool sacar(double valor)
         {
-            if (v <= Saldo && v > 0)
+            if (valor <= Saldo && valor > 0)
             {
-                Saldo -= v;
+                Saldo -= valor;
                 return true;
             }
             return false;
         }
 
-        internal bool depositar(double v)
+        public virtual bool depositar(double valor)
         {
-            if (v > 0)
+            if (valor > 0)
             {
-                Saldo += v;
+                Saldo += valor;
                 return true;
             }
             return false;

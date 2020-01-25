@@ -13,7 +13,8 @@ namespace BancoCaelum
     public partial class Form1 : Form
     {
         Cliente titular = new Cliente();
-        Conta conta = new Conta();
+         Conta ContaForm { get; set; }
+         
 
         public Form1()
         {
@@ -22,19 +23,30 @@ namespace BancoCaelum
 
         private void btnSacar_Click(object sender, EventArgs e)
         {
-            conta.sacar(100);
+               ContaForm.sacar(Convert.ToDouble(txtValor.Text));
             atualizarSaldo();
         }
 
         private void btnDepositar_Click(object sender, EventArgs e)
         {
-            conta.depositar(Convert.ToDouble(txtValor.Text));
+            ContaForm.depositar(Convert.ToDouble(txtValor.Text));
             atualizarSaldo();
         }
         void atualizarSaldo()
         {
-            lblSaldo.Text = Convert.ToString( conta.Saldo);
+            lblSaldo.Text = Convert.ToString( ContaForm.Saldo);
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Relatorio relatorio = new Relatorio();
+            relatorio.TotalizadorDeSaldos(ContaForm);
+            MessageBox.Show(Convert.ToString( relatorio.Saldo));
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ContaForm =  new ContaCorrente();
+        }
     }
 }
