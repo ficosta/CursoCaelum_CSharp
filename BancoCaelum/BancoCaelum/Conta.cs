@@ -2,30 +2,18 @@
 
 namespace BancoCaelum
 {
-    public class Conta
+    public abstract class Conta
     {
         public int Numero { get; set; }
-        public double Saldo { get; private set; }
+        public double Saldo { get; protected set; }
         public Cliente Titular { get; set; }
         //public string Tipo { get; set; }
 
-        public virtual bool Saca(double valorSaque)
-        {
-            if (this.Saldo >= valorSaque)
-            {
-                this.Saldo = this.Saldo - (valorSaque);
-                return true;
-            }
-            return false;
-        }
+        public abstract bool Saca(double valorSaque);
+        
 
-        public virtual void Deposita(double valorDeposito)
-        {
-            if (valorDeposito > 0)
-            {
-                Saldo += valorDeposito;
-            }
-        }
+        public abstract void Deposita(double valorDeposito);
+    
         public bool Transfere(Conta contaDestino, double valor)
         {
             if (Saldo >= valor)
@@ -38,6 +26,7 @@ namespace BancoCaelum
             return false;
 
         }
+        
 
     }
 }

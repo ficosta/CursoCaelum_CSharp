@@ -12,22 +12,23 @@ namespace BancoCaelum
 {
     public partial class FormCadastroConta : Form
     {
-
-        private Form1 formPrincipal;
+        private Form1 FormPrincipal;
 
         public FormCadastroConta(Form1 formPrincipal)
         {
-            this.formPrincipal = formPrincipal;
+            this.FormPrincipal = formPrincipal;
             InitializeComponent();
         }
 
-        private void botaoCadastro_Click(object sender, EventArgs e)
+        private void FormCadastroConta_Click(object sender, EventArgs e)
         {
-            Conta novaConta = new ContaCorrente();
-            novaConta.Titular = new Cliente(textoTitular.Text);
-            novaConta.Numero = Convert.ToInt32(textoNumero.Text);
 
-            this.formPrincipal.AdicionarConta(novaConta);
+
+            this.FormPrincipal.criarConta(textTitular.Text, Convert.ToInt32(textNumero.Text), rdbContaCorrente.Checked);
+           
+
+         
+            this.Close();
         }
     }
 }

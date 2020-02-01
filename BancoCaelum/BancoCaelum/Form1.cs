@@ -12,21 +12,18 @@ namespace BancoCaelum
 {
     public partial class Form1 : Form
     {
-        public Conta[] contas;
-
-        public int numeroDeContas { get; private set; }
+        public List<Conta> contas;
+        private int numeroDeContas;
 
         public Form1()
         {
             InitializeComponent();
         }
 
-        public void AdicionarConta(Conta conta)
+        public void AdicionaConta(Conta conta)
         {
-            this.contas[this.numeroDeContas] = conta;
-            this.numeroDeContas++;
-            comboContas.Items.Add($"Titular: {conta.Titular.Nome}");
-            comboContaDestino.Items.Add($"Titular: {conta.Titular.Nome}");
+            contas.Add(conta);
+            carregarCombo();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -60,8 +57,6 @@ namespace BancoCaelum
                 atualizaSaldo();
             }
 
-            
-
         }
 
         private void btnDepositar_Click(object sender, EventArgs e)
@@ -83,46 +78,36 @@ namespace BancoCaelum
         private void atualizaSaldo()
         {
             int indice = Convert.ToInt32(comboContas.SelectedIndex);
-            Conta contaSelecionada = contas[indice]; 
+            Conta contaSelecionada = contas[indice];
             txtSaldo.Text = "R$ " + Convert.ToString(contaSelecionada.Saldo);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            contas = new Conta[10];
+            contas = new List<Conta>();
+            criarConta("Victor", 1);
+            criarConta("Mauricio", 2);
+            criarConta("Osni", 3);
 
-            Conta c1 = new Conta();
-            c1.Titular = new Cliente("Victor");
-            c1.Numero = 1;
-            AdicionarConta(c1);
-
-            Conta c2 = new Conta();
-            c2.Titular = new Cliente("Mauricio");
-            c2.Numero = 2;
-            AdicionarConta(c2);
-
-            Conta c3 = new Conta();
-            c3.Titular = new Cliente("Osni");
-            c3.Numero = 3;
-            AdicionarConta(c3);
-            
-
-            //foreach (Conta selecionada in contas) 
-            //{
-            //    comboContas.Items.Add(selecionada.Titular.Nome);
-            //}
-
-            //foreach (Conta selecionada in contas)
-            //{
-            //    comboContaDestino.Items.Add(selecionada.Titular.Nome);
-            //}
-
-
+            //ITributavel t = new ITributavel();
         }
 
-        private void btnCadastrar_Click(object sender, EventArgs e)
+        public void criarConta(string Nome, int Numero, bool isContaCorrente = true)
         {
-            MessageBox.Show("Cadastrado com Sucesso!");
+            Conta c1;
+            if (isContaCorrente)
+            {
+                c1 = new ContaCorrente();
+            }
+            else
+            {
+                c1 = new ContaPoupanca();
+            }
+
+            c1.Titular = new Cliente(Nome);
+            c1.Numero = Numero;
+            AdicionaConta(c1);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -133,7 +118,7 @@ namespace BancoCaelum
             MessageBox.Show($"Total do Banco é:{rel.totalBanco}");
 
         }
-    
+
 
         private void comboContas_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -175,6 +160,56 @@ namespace BancoCaelum
         {
             FormCadastroConta formularioDeCadastro = new FormCadastroConta(this);
             formularioDeCadastro.ShowDialog();
+        }
+
+        private void btnExcluirConta_Click(object sender, EventArgs e)
+        {
+            //Conta contaexcluida= new Conta();
+            //foreach (Conta conta in contas)
+            //{
+            //    if (conta.Titular.Nome == txtNome.Text)
+            //    {
+            //        contaexcluida = conta;
+            //    }
+
+            //}
+            //contas.Remove(contaexcluida);
+            contas.Remove((Conta)comboContas.SelectedItem);
+            MessageBox.Show($"Conta Excluída: {(Conta)comboContas.SelectedItem}");
+
+            carregarCombo();
+        }
+        private void carregarCombo()
+        {
+            comboContas.Items.Clear();
+            comboContaDestino.Items.Clear();
+
+            foreach (Conta conta in contas)
+            {
+                //comboContas.Items.Add(conta.Titular.Nome);
+                //comboContaDestino.Items.Add(conta.Titular.Nome);
+                comboContas.Items.Add(conta);
+                comboContaDestino.Items.Add(conta);
+
+            }
+
+        }
+
+        private void btnCalculaTributos_Click(object sender, EventArgs e)
+        {
+            ContaCorrente conta = new ContaCorrente();
+            conta.Deposita(200);
+
+            MessageBox.Show($"Imposto da CC: {conta.CalculaTributos()}");
+
+            ITributavel t = conta;
+            MessageBox.Show($"Imposto da conta pela Interface {t.CalculaTributos()}");
+
+            SeguroVida sv = new SeguroVida();
+            MessageBox.Show($"Imposto do Seguro de Vida {sv.CalculaTributos()}");
+
+            t = sv;
+            MessageBox.Show($"Imposto do seguro pela Interface {t.CalculaTributos()}");
         }
     }
 }

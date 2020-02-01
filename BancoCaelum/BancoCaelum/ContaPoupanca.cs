@@ -8,10 +8,30 @@ namespace BancoCaelum
 {
    public class ContaPoupanca : Conta
     {
-        public override bool Saca(double valorSaque)
+        public override void Deposita(double valorDeposito)
         {
-            return base.Saca(valorSaque+0.10);
+            if (valorDeposito > 0)
+            {
+                Saldo += valorDeposito;
+            }
         }
 
+        public override bool Saca(double valorSaque)
+        {
+            if (this.Saldo >= valorSaque)
+            {
+                this.Saldo = this.Saldo - (valorSaque +.1);
+                return true;
+            }
+            return false;
+        }
+
+        public override string ToString()
+        {
+
+            return $"{Numero} - CP - {Titular.Nome}";
+        }
+
+        
     }
 }
