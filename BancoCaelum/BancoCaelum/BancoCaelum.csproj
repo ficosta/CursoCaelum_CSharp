@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6128A164-F33A-4FBC-B808-C82D052BAAFC}</ProjectGuid>
+    <ProjectGuid>{87015DEF-DE9B-437A-B4DE-F8D6EA59C7A6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>BancoCaelum</RootNamespace>
     <AssemblyName>BancoCaelum</AssemblyName>
@@ -56,11 +56,20 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCadastroConta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCadastroConta.Designer.cs">
+      <DependentUpon>FormCadastroConta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Relatorio.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCadastroConta.resx">
+      <DependentUpon>FormCadastroConta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

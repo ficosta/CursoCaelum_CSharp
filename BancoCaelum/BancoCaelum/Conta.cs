@@ -1,30 +1,43 @@
-﻿using System;
+﻿using System.ComponentModel;
 
 namespace BancoCaelum
 {
-    internal class Conta
+    public class Conta
     {
-        public double Saldo { get; private set; }
         public int Numero { get; set; }
+        public double Saldo { get; private set; }
         public Cliente Titular { get; set; }
-        public virtual bool sacar(double valor)
+        //public string Tipo { get; set; }
+
+        public virtual bool Saca(double valorSaque)
         {
-            if (valor <= Saldo && valor > 0)
+            if (this.Saldo >= valorSaque)
             {
-                Saldo -= valor;
+                this.Saldo = this.Saldo - (valorSaque);
                 return true;
             }
             return false;
         }
 
-        public virtual bool depositar(double valor)
+        public virtual void Deposita(double valorDeposito)
         {
-            if (valor > 0)
+            if (valorDeposito > 0)
             {
-                Saldo += valor;
+                Saldo += valorDeposito;
+            }
+        }
+        public bool Transfere(Conta contaDestino, double valor)
+        {
+            if (Saldo >= valor)
+            {
+                Saca(valor);
+                contaDestino.Deposita(valor);
                 return true;
+
             }
             return false;
+
         }
+
     }
 }

@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace BancoCaelum
 {
-    class ContaCorrente: Conta
+    public class ContaCorrente : Conta
     {
-        public override bool sacar(double valor)
+        public override bool Saca(double valorSaque)
         {
-            return base.sacar(valor + 0.10);
+            return base.Saca(valorSaque + 0.05);
         }
-        public override bool depositar(double valor)
+
+        public override void Deposita(double valorDeposito)
         {
-            return base.depositar(valor - 0.05);
+            base.Deposita(valorDeposito-0.10);
         }
     }
+
 }
