@@ -38,40 +38,61 @@ namespace BancoCaelum
 
         private void btnSacar_Click(object sender, EventArgs e)
         {
-            double valor = Convert.ToDouble(txtValor.Text);
-            int indice = Convert.ToInt32(comboContas.SelectedIndex);
-            Conta contaSelecionada = contas[indice];
+            try
+            {
 
-            if (contaSelecionada.Saca(valor))
-            {
-                lblStatus.Text = ($"Saque realizado com sucesso!");
-                lblStatus.BackColor = Color.Red;
-                txtValor.Clear();
-                atualizaSaldo();
+                double valor = Convert.ToDouble(txtValor.Text);
+                int indice = Convert.ToInt32(comboContas.SelectedIndex);
+                Conta contaSelecionada = contas[indice];
+
+                if (contaSelecionada.Saca(valor))
+                {
+                    lblStatus.Text = ($"Saque realizado com sucesso!");
+                    lblStatus.BackColor = Color.Red;
+                    txtValor.Clear();
+                    atualizaSaldo();
+                }
+                else
+                {
+                    lblStatus.Text = ($"Erro ao sacar!");
+                    lblStatus.BackColor = Color.Red;
+                    txtValor.Clear();
+                    atualizaSaldo();
+                }
             }
-            else
+            catch (Exception)
             {
-                lblStatus.Text = ($"Erro ao sacar!");
-                lblStatus.BackColor = Color.Red;
-                txtValor.Clear();
-                atualizaSaldo();
+
+                MessageBox.Show("Conta nao selecionada");
             }
+
 
         }
 
         private void btnDepositar_Click(object sender, EventArgs e)
         {
 
-            double valor = Convert.ToDouble(txtValor.Text); //converter string em double(numero)  double.parse também converte.
+            try
+            {
+                double valor = Convert.ToDouble(txtValor.Text); //converter string em double(numero)  double.parse também converte.
 
-            int indice = Convert.ToInt32(comboContas.SelectedIndex);
-            Conta contaSelecionada = contas[indice];
-            contaSelecionada.Deposita(valor);
+                int indice = Convert.ToInt32(comboContas.SelectedIndex);
+                Conta contaSelecionada = contas[indice];
+                contaSelecionada.Deposita(valor);
 
-            lblStatus.Text = ($"Depósito realizado com sucesso!");
-            lblStatus.BackColor = Color.Green;
-            txtValor.Clear();
-            atualizaSaldo();
+                lblStatus.Text = ($"Depósito realizado com sucesso!");
+                lblStatus.BackColor = Color.Green;
+                txtValor.Clear();
+                atualizaSaldo();
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Conta nao selecionada.");
+            }
+
+
+
 
         }
 
@@ -137,23 +158,32 @@ namespace BancoCaelum
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int indice = comboContas.SelectedIndex;
-            Conta selecionada = contas[indice];
-
-            int indiceDestino = comboContaDestino.SelectedIndex;
-            Conta selecionadaDestino = contas[indiceDestino];
-
-            if (selecionada.Transfere(selecionadaDestino, Convert.ToDouble(txtValor.Text)))
+            try
             {
-                MessageBox.Show("Transferencia Realizada!!!");
-                txtValor.Clear();
-                atualizaSaldo();
+                int indice = comboContas.SelectedIndex;
+                Conta selecionada = contas[indice];
 
+                int indiceDestino = comboContaDestino.SelectedIndex;
+                Conta selecionadaDestino = contas[indiceDestino];
+
+                if (selecionada.Transfere(selecionadaDestino, Convert.ToDouble(txtValor.Text)))
+                {
+                    MessageBox.Show("Transferencia Realizada!!!");
+                    txtValor.Clear();
+                    atualizaSaldo();
+
+                }
+                else
+                {
+                    MessageBox.Show("Erro na transferencia");
+                }
             }
-            else
+            catch (Exception)
             {
-                MessageBox.Show("Erro na transferencia");
+
+                MessageBox.Show("Selecione as contas para transferencia!");
             }
+            
         }
 
         private void botaoNovaConta_Click(object sender, EventArgs e)
